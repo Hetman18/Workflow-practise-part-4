@@ -1,0 +1,31 @@
+#name: Deploy
+#on: push
+#jobs:
+#  lintRunner:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: GET code
+#        uses: actions/checkout@v3
+#      - name: Install dependencies
+#        run: npm ci
+#      - name: Run Lint
+#        run: npm run lint
+#  testRunner:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: GET code
+#        uses: actions/checkout@v3
+#      - name: Install dependencies
+#        run: npm ci
+#      - name: Run test
+#        run: npm run test
+#  buildRunner:
+#    needs: [lintRunner, testRunner]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: GET code
+#        uses: actions/checkout@v3
+#      - name: Install dependencies
+#        run: npm ci
+#      - name: Build project
+#        run: npm run build

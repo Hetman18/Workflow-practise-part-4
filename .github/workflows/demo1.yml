@@ -1,0 +1,33 @@
+name: Events Demo 1
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - master # pullRequests from main branch triggers workflows
+      - 'dev-*' # pullRequests from branch that starts from 'dev-' (dev-new,dev-this-is-new) triggers workflows
+      - 'feat/**' # pullRequests from branch that starts from 'feat/' (feat/new, feat/new/button) triggers workflows
+  workflows_dispatch:
+  push:
+    branches:
+      - master # push from main branch triggers workflows
+      - 'dev-*' # push from branch that starts from 'dev-' (dev-new,dev-this-is-new) triggers workflows
+      - 'feat/**' # push from branch that starts from 'feat/' (feat/new, feat/new/button) triggers workflows
+    paths-ignore:
+      - '.github/workflows/*' #ignire triggering workflows if any changes for this path
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output event data
+        run: echo "${{ toJSON(github.event) }}"
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Test code
+        run: npm run test
+      - name: Build code
+        run: npm run build
+      - name: Deploy project
+        run: echo "Deploying..."

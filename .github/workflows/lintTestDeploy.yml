@@ -23,4 +23,4 @@ jobs:
       - name: GET code
         uses: actions/checkout@3
       - name: Build project
-        uses: npm run build
+        run: npm run build
